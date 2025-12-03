@@ -45,7 +45,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
-          extensions: :xdebug
+          extensions: :xdebug, sockets, amqp
 
       - run: php ./tests/bin/pin-symfony-version.php "${{ matrix.symfony_version }}"
 
