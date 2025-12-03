@@ -36,7 +36,6 @@ class AmqpSender implements SenderInterface, BatchSenderInterface
     #[Override]
     public function send(Envelope $envelope): Envelope
     {
-        /** @psalm-suppress UndefinedClass */
         if ($envelope->last(SymfonyAmqpStamp::class) !== null) {
             throw new LogicException(sprintf(
                 'Wrong AmqpStamp class used. Switch your code from using "%s" to "%s".',
@@ -57,7 +56,6 @@ class AmqpSender implements SenderInterface, BatchSenderInterface
 
         if (isset($encodedMessage['headers']['Content-Type'])) {
             $contentType = $encodedMessage['headers']['Content-Type'];
-            assert(is_string($contentType));
             unset($encodedMessage['headers']['Content-Type']);
 
             if (! $amqpStamp || ! isset($amqpStamp->getAttributes()['content_type'])) {
@@ -80,7 +78,6 @@ class AmqpSender implements SenderInterface, BatchSenderInterface
         }
 
         $body = $encodedMessage['body'];
-        assert(is_string($body));
 
         /** @var array<string, mixed> $headers */
         $headers = $encodedMessage['headers'] ?? [];

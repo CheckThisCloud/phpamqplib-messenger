@@ -27,7 +27,6 @@ class AmqpReceiver implements QueueReceiverInterface, MessageCountAwareInterface
     /**
      * @return iterable<Envelope>
      *
-     * @psalm-suppress ImplementedReturnTypeMismatch
      */
     #[Override]
     public function get(): iterable
@@ -40,7 +39,6 @@ class AmqpReceiver implements QueueReceiverInterface, MessageCountAwareInterface
      *
      * @return iterable<Envelope>
      *
-     * @psalm-suppress ImplementedReturnTypeMismatch
      */
     #[Override]
     public function getFromQueues(array $queueNames): iterable
@@ -99,6 +97,7 @@ class AmqpReceiver implements QueueReceiverInterface, MessageCountAwareInterface
         foreach ($amqpEnvelopes as $amqpEnvelope) {
             $body = $amqpEnvelope->getBody();
 
+            /** @var array<string, string> $headers */
             $headers = $amqpEnvelope->getHeaders();
 
             try {

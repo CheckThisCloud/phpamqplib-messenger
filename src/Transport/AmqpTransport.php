@@ -35,7 +35,6 @@ class AmqpTransport implements QueueReceiverInterface, MessageCountAwareInterfac
     /**
      * @return iterable<Envelope>
      *
-     * @psalm-suppress ImplementedReturnTypeMismatch
      */
     #[Override]
     public function get(): iterable
@@ -48,7 +47,6 @@ class AmqpTransport implements QueueReceiverInterface, MessageCountAwareInterfac
      *
      * @return iterable<Envelope>
      *
-     * @psalm-suppress ImplementedReturnTypeMismatch
      */
     #[Override]
     public function getFromQueues(array $queueNames): iterable

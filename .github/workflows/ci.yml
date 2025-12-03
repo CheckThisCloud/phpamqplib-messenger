@@ -54,6 +54,9 @@ jobs:
       - name: PHPCS
         run: ./vendor/bin/phpcs
 
+      - name: PHPStan
+        run: ./vendor/bin/phpstan analyse
+
       - name: PHPUnit
         run: ./vendor/bin/phpunit
         env:
