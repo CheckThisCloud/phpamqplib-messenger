@@ -45,7 +45,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           coverage: none
-          extensions: :xdebug
+          extensions: :xdebug, sockets, amqp
 
       - run: php ./tests/bin/pin-symfony-version.php "${{ matrix.symfony_version }}"
 
@@ -53,6 +53,9 @@ jobs:
 
       - name: PHPCS
         run: ./vendor/bin/phpcs
+
+      - name: PHPStan
+        run: ./vendor/bin/phpstan analyse
 
       - name: PHPUnit
         run: ./vendor/bin/phpunit
