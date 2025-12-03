@@ -17,8 +17,6 @@ use Symfony\Component\Messenger\Transport\Sender\SenderInterface;
 use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 use Throwable;
 
-use function assert;
-use function is_string;
 use function sprintf;
 
 class AmqpSender implements SenderInterface, BatchSenderInterface

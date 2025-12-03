@@ -24,10 +24,7 @@ class AmqpReceiver implements QueueReceiverInterface, MessageCountAwareInterface
     ) {
     }
 
-    /**
-     * @return iterable<Envelope>
-     *
-     */
+    /** @return iterable<Envelope> */
     #[Override]
     public function get(): iterable
     {
@@ -38,7 +35,6 @@ class AmqpReceiver implements QueueReceiverInterface, MessageCountAwareInterface
      * @param array<string> $queueNames
      *
      * @return iterable<Envelope>
-     *
      */
     #[Override]
     public function getFromQueues(array $queueNames): iterable

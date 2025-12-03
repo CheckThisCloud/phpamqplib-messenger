@@ -11,7 +11,6 @@ use Jwage\PhpAmqpLibMessengerBundle\Transport\AmqpReceivedStamp;
 use Jwage\PhpAmqpLibMessengerBundle\Transport\AmqpStamp;
 use Jwage\PhpAmqpLibMessengerBundle\Transport\AmqpTransport;
 use PhpAmqpLib\Wire\AMQPTable;
-use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -51,7 +50,8 @@ class TransportFunctionalTest extends KernelTestCase
 
         self::assertCount(3, $envelopes);
 
-        self::assertInstanceOf(ConfirmMessage::class, $envelopes[0]->getMessage());;
+        self::assertInstanceOf(ConfirmMessage::class, $envelopes[0]->getMessage());
+
         self::assertEquals(1, $envelopes[0]->getMessage()->count);
         self::assertEquals(1, $envelopes[0]->last(AmqpReceivedStamp::class)?->getAmqpEnvelope()?->getHeaders()['test1']);
         self::assertEquals(2, $envelopes[0]->last(AmqpReceivedStamp::class)?->getAmqpEnvelope()?->getHeaders()['test2']);
@@ -250,8 +250,8 @@ class TransportFunctionalTest extends KernelTestCase
 
         $container = static::getContainer();
 
-        /** @var MessageBusInterface $bus */
         $bus = $container->get(MessageBusInterface::class);
+        assert($bus instanceof MessageBusInterface);
 
         $this->bus = $bus;
 

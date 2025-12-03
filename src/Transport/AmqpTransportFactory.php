@@ -13,9 +13,7 @@ use Symfony\Component\Messenger\Transport\TransportInterface;
 
 use function str_starts_with;
 
-/**
- * @implements TransportFactoryInterface<AmqpTransport>
- */
+/** @implements TransportFactoryInterface<AmqpTransport> */
 class AmqpTransportFactory implements TransportFactoryInterface
 {
     public function __construct(
@@ -49,6 +47,7 @@ class AmqpTransportFactory implements TransportFactoryInterface
 
     /**
      * @param array<array-key, mixed> $options
+     *
      * @inheritDoc
      */
     #[Override]
