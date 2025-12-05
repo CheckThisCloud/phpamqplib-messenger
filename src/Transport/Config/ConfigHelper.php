@@ -64,7 +64,9 @@ class ConfigHelper
     {
         /** @var array<string, mixed>|null $filteredValue */
         $filteredValue = self::getType($config, $key, self::TYPE_ARRAY);
-        assert($filteredValue === null);
+
+        // @phpstan-ignore-next-line
+        assert(is_array($filteredValue) || $filteredValue === null);
 
         return $filteredValue;
     }
