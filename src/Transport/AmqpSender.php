@@ -34,9 +34,11 @@ class AmqpSender implements SenderInterface, BatchSenderInterface
     #[Override]
     public function send(Envelope $envelope): Envelope
     {
+        // @phpstan-ignore-next-line
         if ($envelope->last(SymfonyAmqpStamp::class) !== null) {
             throw new LogicException(sprintf(
                 'Wrong AmqpStamp class used. Switch your code from using "%s" to "%s".',
+                // @phpstan-ignore class.notFound
                 SymfonyAmqpStamp::class,
                 AmqpStamp::class,
             ));
