@@ -18,7 +18,6 @@
         "php": "^8.4",
         "php-amqplib/php-amqplib": "^3.7",
         "phpstan/phpstan-phpunit": "^2.0",
-        "symfony/amqp-messenger": "^7.4 || ^8.0",
         "symfony/framework-bundle": "^7.4 || ^8.0",
         "symfony/messenger": "^7.4 || ^8.0"
     },
