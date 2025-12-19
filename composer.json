@@ -28,7 +28,6 @@
         "doctrine/coding-standard": "^14.0",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^12.1",
-        "shipmonk/composer-dependency-analyser": "^1.8",
         "symfony/phpunit-bridge": "^7.2 || ^8.0",
         "symfony/framework-bundle": "^7.4 || ^8.0"
     },
