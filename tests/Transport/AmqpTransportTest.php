@@ -49,6 +49,42 @@ class AmqpTransportTest extends TestCase
         self::assertSame($return, $this->transport->get());
     }
 
+    public function testGetPassesFetchSizeToReceiver(): void
+    {
+        $return = [new Envelope(new stdClass())];
+
+        $this->receiver->expects(self::once())
+            ->method('get')
+            ->with(5)
+            ->willReturn($return);
+
+        self::assertSame($return, $this->transport->get(5));
+    }
+
+    public function testGetFromQueues(): void
+    {
+        $return = [new Envelope(new stdClass())];
+
+        $this->receiver->expects(self::once())
+            ->method('getFromQueues')
+            ->with(['queue_name'], 1)
+            ->willReturn($return);
+
+        self::assertSame($return, $this->transport->getFromQueues(['queue_name']));
+    }
+
+    public function testGetFromQueuesPassesFetchSizeToReceiver(): void
+    {
+        $return = [new Envelope(new stdClass())];
+
+        $this->receiver->expects(self::once())
+            ->method('getFromQueues')
+            ->with(['queue_name'], 5)
+            ->willReturn($return);
+
+        self::assertSame($return, $this->transport->getFromQueues(['queue_name'], 5));
+    }
+
     public function testAck(): void
     {
         $envelope = new Envelope(new stdClass());
