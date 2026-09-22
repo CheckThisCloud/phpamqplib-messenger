@@ -8,3 +8,4 @@ parameters:
 
 includes:
     - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - phpstan-baseline.neon

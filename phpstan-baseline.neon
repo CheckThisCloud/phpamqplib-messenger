@@ -1,0 +1,55 @@
+parameters:
+	ignoreErrors:
+		-
+			rawMessage: Unreachable statement - code above always terminates.
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Retry.php
+
+		-
+			rawMessage: Coalesce operator ?? is unnecessary because the left side is always set and the right side is null.
+			identifier: nullCoalesce.unnecessary
+			count: 1
+			path: src/Transport/Config/ExchangeConfig.php
+
+		-
+			rawMessage: 'Parameter #1 $bindingConfig of static method Jwage\PhpAmqpLibMessengerBundle\Transport\Config\BindingConfig::fromArray() expects array{routing_key?: string, arguments?: array<string, mixed>}, array{invalid: true} given.'
+			identifier: argument.type
+			count: 1
+			path: tests/Transport/Config/BindingConfigTest.php
+
+		-
+			rawMessage: 'Parameter #1 $connectionConfig of static method Jwage\PhpAmqpLibMessengerBundle\Transport\Config\ConnectionConfig::fromArray() expects array{auto_setup?: bool, host?: string, port?: mixed, user?: string, login?: string, password?: string, vhost?: string, insist?: mixed, ...}, array{invalid: true} given.'
+			identifier: argument.type
+			count: 1
+			path: tests/Transport/Config/ConnectionConfigTest.php
+
+		-
+			rawMessage: 'Parameter #1 $delayConfig of static method Jwage\PhpAmqpLibMessengerBundle\Transport\Config\DelayConfig::fromArray() expects array{exchange?: array{name?: string, default_publish_routing_key?: string, type?: string, passive?: mixed, durable?: mixed, auto_delete?: mixed, arguments?: array<string, mixed>}, enabled?: mixed, auto_setup?: mixed, queue_name_pattern?: string, arguments?: array<string, mixed>}, array{invalid: true} given.'
+			identifier: argument.type
+			count: 1
+			path: tests/Transport/Config/DelayConfigTest.php
+
+		-
+			rawMessage: 'Parameter #1 $exchangeConfig of static method Jwage\PhpAmqpLibMessengerBundle\Transport\Config\ExchangeConfig::fromArray() expects array{name?: string, type?: string, default_publish_routing_key?: string, passive?: mixed, durable?: mixed, auto_delete?: mixed, arguments?: array<string, mixed>}, array{invalid: true} given.'
+			identifier: argument.type
+			count: 1
+			path: tests/Transport/Config/ExchangeConfigTest.php
+
+		-
+			rawMessage: 'Parameter #1 $queueConfig of static method Jwage\PhpAmqpLibMessengerBundle\Transport\Config\QueueConfig::fromArray() expects array{name?: string, prefetch_count?: mixed, wait_timeout?: mixed, passive?: mixed, durable?: mixed, exclusive?: mixed, auto_delete?: mixed, binding_keys?: array<string>, ...}, array{invalid: true} given.'
+			identifier: argument.type
+			count: 1
+			path: tests/Transport/Config/QueueConfigTest.php
+
+		-
+			rawMessage: 'Parameter #1 $sslConfig of static method Jwage\PhpAmqpLibMessengerBundle\Transport\Config\SslConfig::fromArray() expects array{cafile?: string|null, capath?: string|null, local_cert?: string|null, local_pk?: string|null, verify_peer?: bool|null, verify_peer_name?: bool|null, passphrase?: string|null, ciphers?: string|null, ...}, array{invalid: true} given.'
+			identifier: argument.type
+			count: 1
+			path: tests/Transport/Config/SslConfigTest.php
+
+		-
+			rawMessage: 'Class Jwage\PhpAmqpLibMessengerBundle\Transport\AmqpTransport referenced with incorrect case: Jwage\PhpAmqpLibMessengerBundle\Transport\AMQPTransport.'
+			identifier: class.nameCase
+			count: 1
+			path: tests/TransportFunctionalTest.php
