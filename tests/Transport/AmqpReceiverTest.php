@@ -81,6 +81,47 @@ class AmqpReceiverTest extends TestCase
         self::assertSame('queue_name', $amqpReceivedStamp1->getQueueName());
     }
 
+    public function testGetYieldsTheWholeBufferRegardlessOfFetchSize(): void
+    {
+        $amqpEnvelope1 = new AmqpEnvelope(new AMQPMessage('1'));
+        $amqpEnvelope2 = new AmqpEnvelope(new AMQPMessage('2'));
+
+        $this->connection->expects(self::any())
+            ->method('getQueueNames')
+            ->willReturn(['queue_name']);
+
+        $this->connection->expects(self::once())
+            ->method('consume')
+            ->willReturn([$amqpEnvelope1, $amqpEnvelope2]);
+
+        $this->serializer->expects(self::exactly(2))
+            ->method('decode')
+            ->willReturn(new Envelope(new stdClass()));
+
+        $envelopes = [...$this->receiver->get(1)];
+
+        self::assertCount(2, $envelopes);
+    }
+
+    public function testGetFromQueuesYieldsTheWholeBufferRegardlessOfFetchSize(): void
+    {
+        $amqpEnvelope1 = new AmqpEnvelope(new AMQPMessage('1'));
+        $amqpEnvelope2 = new AmqpEnvelope(new AMQPMessage('2'));
+
+        $this->connection->expects(self::once())
+            ->method('consume')
+            ->with('queue_name')
+            ->willReturn([$amqpEnvelope1, $amqpEnvelope2]);
+
+        $this->serializer->expects(self::exactly(2))
+            ->method('decode')
+            ->willReturn(new Envelope(new stdClass()));
+
+        $envelopes = [...$this->receiver->getFromQueues(['queue_name'], 1)];
+
+        self::assertCount(2, $envelopes);
+    }
+
     public function testAck(): void
     {
         $amqpEnvelope = $this->createMock(AmqpEnvelope::class);

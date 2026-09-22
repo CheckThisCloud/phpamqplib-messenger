@@ -34,9 +34,9 @@ class AmqpTransport implements QueueReceiverInterface, MessageCountAwareInterfac
 
     /** @return iterable<Envelope> */
     #[Override]
-    public function get(): iterable
+    public function get(int $fetchSize = 1): iterable
     {
-        return $this->getReceiver()->get();
+        return $this->getReceiver()->get($fetchSize);
     }
 
     /**
@@ -45,9 +45,9 @@ class AmqpTransport implements QueueReceiverInterface, MessageCountAwareInterfac
      * @return iterable<Envelope>
      */
     #[Override]
-    public function getFromQueues(array $queueNames): iterable
+    public function getFromQueues(array $queueNames, int $fetchSize = 1): iterable
     {
-        return $this->getReceiver()->getFromQueues($queueNames);
+        return $this->getReceiver()->getFromQueues($queueNames, $fetchSize);
     }
 
     /** @throws Throwable */

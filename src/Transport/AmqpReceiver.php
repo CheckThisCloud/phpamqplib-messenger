@@ -24,11 +24,17 @@ class AmqpReceiver implements QueueReceiverInterface, MessageCountAwareInterface
     ) {
     }
 
-    /** @return iterable<Envelope> */
+    /**
+     * $fetchSize is the hint the Symfony 8.1+ worker passes. It is accepted and ignored: the consumer
+     * hands over everything the broker has delivered so far, and stopping part-way through that
+     * buffer would leave the rest unacked and invisible to this worker until the channel closes.
+     *
+     * @return iterable<Envelope>
+     */
     #[Override]
-    public function get(): iterable
+    public function get(int $fetchSize = 1): iterable
     {
-        yield from $this->getFromQueues($this->connection->getQueueNames());
+        yield from $this->getFromQueues($this->connection->getQueueNames(), $fetchSize);
     }
 
     /**
@@ -37,7 +43,7 @@ class AmqpReceiver implements QueueReceiverInterface, MessageCountAwareInterface
      * @return iterable<Envelope>
      */
     #[Override]
-    public function getFromQueues(array $queueNames): iterable
+    public function getFromQueues(array $queueNames, int $fetchSize = 1): iterable
     {
         foreach ($queueNames as $queueName) {
             yield from $this->getEnvelopes($queueName);
